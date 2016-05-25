@@ -1,5 +1,7 @@
 package com.rahman.aop.model;
 
+import org.mockito.internal.stubbing.answers.ThrowsException;
+
 public class Circle {
 
 	private String name;
@@ -20,5 +22,11 @@ public class Circle {
 	}
 	public void setArea(String area) {
 		this.area = area;
+	}
+	
+	public void getCircleOtherShape(String var){
+		System.out.println("other shape is "+var);
+		//untuk membuat method jadi error
+//		throw(new RuntimeException());
 	}
 }
