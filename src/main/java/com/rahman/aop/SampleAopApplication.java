@@ -32,7 +32,7 @@ public class SampleAopApplication implements CommandLineRunner{
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 		Shape shape = ctx.getBean("shape", Shape.class);
 //		shape.getShapeTriangle().getName();
-//		System.out.println();
+		shape.getShapeCircle().setName("dummy name");
 		shape.getShapeCircle().getName();
 	}
 

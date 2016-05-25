@@ -26,6 +26,15 @@ public class ShapeAspect {
 		Circle c = (Circle)joinPoint.getTarget();
 		System.err.println(c.getArea());
 	}
+	
+	/**
+	 * jika ingin memanggil args jangan lupa sertakan juga class execution yang akan di pakai
+	 * 
+	 */
+	@Before("getAllCircle() && args(name)")
+	public void stringArgumentMethod(String name){
+		System.err.println("demo String argument has been called. values: "	+name);
+	}
 		
 	@Before("execution(public String getName())")
 	public void loggingAdvanceBefore(){
