@@ -1,9 +1,11 @@
 package com.rahman.aop.service;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -20,6 +22,8 @@ public class ShapeAspect {
 
 	/**
 	 * keyword within di pakai jika ingin execution semua method yang ada pada class yang disebutkan
+	 * jika ingin execution pada semua method pada semua class dalam suatu package, maka gunakan
+	 * @Pointcut("execution(* com.rahman.aop.model.*(..))")
 	 */
 	@Pointcut("within(com.rahman.aop.model.Circle)")
 	public void getAllCircle(){}
@@ -61,6 +65,28 @@ public class ShapeAspect {
 	@AfterThrowing("getAllCircle() && args(name)")
 	public void throwsReturnArgs(String name){
 		System.err.println("the exception error is in "+name);
+	}
+	
+	/**
+	 * @Around adalah bentuk simple dari gabungan @before dan @after
+	 * before di lakukan sebelum perintah proceedingJoinPoint.proceed() di eksekusi dan sebaliknya pada @after
+	 * 
+	 *  perintah eksekusi yang ada pada @around bisa menggunakan seperti execution, 
+	 *  akan tetapi jika perintah yang di lakukan di dalam @around adalah beberapa perintah maka gunakan keyword @annotation
+	 */
+//	@Around("getAllCircle()")
+	@Around("@annotation(com.rahman.aop.annotation.Loggable)")
+	public Object sampleCustomAnnotation(ProceedingJoinPoint proceedingJoinPoint){
+		Object obj = null;
+		try {
+			System.err.println("before processing");
+			obj = proceedingJoinPoint.proceed();
+			System.err.println("after processing");
+		} catch (Throwable e) {
+			System.err.println("after Throwing");
+		}
+		System.err.println("finally processing");
+		return obj;
 	}
 		
 	@Before("execution(public String getName())")

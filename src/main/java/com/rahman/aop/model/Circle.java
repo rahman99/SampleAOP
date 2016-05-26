@@ -2,6 +2,8 @@ package com.rahman.aop.model;
 
 import org.mockito.internal.stubbing.answers.ThrowsException;
 
+import com.rahman.aop.annotation.Loggable;
+
 public class Circle {
 
 	private String name;
@@ -28,5 +30,13 @@ public class Circle {
 		System.out.println("other shape is "+var);
 		//untuk membuat method jadi error
 //		throw(new RuntimeException());
+	}
+	
+	/**
+	 * tambahkan keyword @{nama_class} agar bisa di deteksi oleh @annotation pada @aspect
+	 */
+	@Loggable
+	public void sampleLoggable(){
+		System.out.println("demo sample loggable");
 	}
 }

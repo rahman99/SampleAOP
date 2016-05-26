@@ -33,7 +33,8 @@ public class SampleAopApplication implements CommandLineRunner{
 		Shape shape = ctx.getBean("shape", Shape.class);
 //		shape.getShapeTriangle().getName();
 //		shape.getShapeCircle().setName("dummy name");
-		shape.getShapeCircle().getCircleOtherShape("unShape");
+//		shape.getShapeCircle().getCircleOtherShape("unShape");
+		shape.getShapeCircle().sampleLoggable();
 	}
 
 	/*@Override
